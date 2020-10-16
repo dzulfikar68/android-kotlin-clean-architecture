@@ -8,7 +8,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.GsonBuilder
 import com.google.gson.Gson
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 
@@ -38,7 +37,6 @@ class ApiModule {
         return Retrofit.Builder()
             .baseUrl("https://my-json-server.typicode.com/glendmaatita/userjsondemo/")
             .addConverterFactory(GsonConverterFactory.create(gson))
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .client(client)
             .build();
 
