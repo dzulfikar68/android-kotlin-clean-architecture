@@ -10,8 +10,9 @@ class GetUsers(private var repository: UserRepository,) {
 
     fun getUsers(listener: UseCaseListener<List<User>>, params: Map<String, String>) {
         job = GlobalScope.launch(Dispatchers.IO) {
+            val response = repository.getUsers(params)
             withContext(Dispatchers.Main) {
-                listener.onComplete(repository.getUsers(params))
+                listener.onComplete(response)
             }
         }
     }

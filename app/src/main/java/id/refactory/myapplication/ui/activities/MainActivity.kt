@@ -34,8 +34,8 @@ class MainActivity : AppCompatActivity(), MainView.View {
     }
 
     override fun onPrepare() {
-        rv_users.layoutManager = LinearLayoutManager(this)
         adapter = UserListAdapter(this, users)
+        rv_users.layoutManager = LinearLayoutManager(this)
         rv_users.adapter = adapter
         presenter.onLoadUsers(mutableMapOf())
     }
