@@ -12,7 +12,7 @@ class UserDataMapper {
         if (result is GetUsersApiResponse) {
             result.data.forEach {
                 response.add(
-                    User(null, it.name, it.phone)
+                    User(it.name, it.email, it.phone)
                 )
             }
         }

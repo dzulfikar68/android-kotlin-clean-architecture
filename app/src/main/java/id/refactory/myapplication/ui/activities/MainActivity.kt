@@ -2,6 +2,7 @@ package id.refactory.myapplication.ui.activities
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import id.refactory.domain.User
 import id.refactory.myapplication.R
 import id.refactory.myapplication.ui.adapters.UserListAdapter
@@ -33,6 +34,7 @@ class MainActivity : AppCompatActivity(), MainView.View {
     }
 
     override fun onPrepare() {
+        rv_users.layoutManager = LinearLayoutManager(this)
         adapter = UserListAdapter(this, users)
         rv_users.adapter = adapter
         presenter.onLoadUsers(mutableMapOf())
