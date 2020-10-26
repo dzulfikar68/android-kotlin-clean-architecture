@@ -1,16 +1,10 @@
 package id.refactory.myapplication.infrastructures.di.modules
 
-import dagger.Module
-import dagger.Provides
-import id.refactory.data.persistences.repositories.UserRepository
 import id.refactory.usecases.cases.GetUsers
-import javax.inject.Named
-import kotlin.coroutines.CoroutineContext
+import org.koin.core.qualifier.named
+import org.koin.dsl.module
 
-@Module
-class UseCaseModule  {
-    @Provides @Named("APIGetUserUseCase")
-    fun provideGetUsersUseCase(@Named("APIUserRepository") userRepository: UserRepository, context: CoroutineContext): GetUsers {
-        return GetUsers(userRepository, context)
-    }
+val useCaseModule = module {
+
+    factory(named("APIGetUserUseCase")) { GetUsers(get(named("APIUserRepository")), get()) }
 }

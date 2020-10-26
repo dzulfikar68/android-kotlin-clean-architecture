@@ -1,44 +1,35 @@
 package id.refactory.myapplication.infrastructures.di.modules
 
-import dagger.Module
-import dagger.Provides
-import id.refactory.myapplication.infrastructures.api.UserApi
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.GsonBuilder
-import com.google.gson.Gson
+import id.refactory.myapplication.infrastructures.api.UserApi
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.dsl.module
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
-@Module
-class ApiModule {
+val apiModule = module {
 
-    @Provides
-    fun provideApiService(retrofit: Retrofit): UserApi {
-        return retrofit.create(UserApi::class.java);
+    factory {
+        GsonBuilder()
+        .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+        .create()
     }
 
-    @Provides
-    fun provideGson(): Gson {
-        return GsonBuilder()
-            .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
-            .create()
-    }
-
-    @Provides
-    fun provideRetrofit(gson: Gson): Retrofit {
+    factory<Retrofit> {
         val interceptor = HttpLoggingInterceptor()
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
         val client = OkHttpClient.Builder()
             .addInterceptor(interceptor)
             .build()
 
-        return Retrofit.Builder()
+        Retrofit.Builder()
             .baseUrl("https://my-json-server.typicode.com/glendmaatita/userjsondemo/")
-            .addConverterFactory(GsonConverterFactory.create(gson))
+            .addConverterFactory(GsonConverterFactory.create(get()))
             .client(client)
-            .build();
-
+            .build()
     }
+
+    factory<UserApi> { get<Retrofit>().create(UserApi::class.java) }
 }

@@ -16,7 +16,11 @@ class GetUsers(private var repository: UserRepository, private var context: Coro
         job = GlobalScope.launch(context) {
             repository.getUsers(params)
                 .flowOn(Dispatchers.IO)
-                .catch { listener.onError(it) }
+                .catch {
+                    withContext(Dispatchers.Main) {
+                        listener.onError(it)
+                    }
+                }
                 .collect {
                     withContext(Dispatchers.Main) {
                         listener.onComplete(it)

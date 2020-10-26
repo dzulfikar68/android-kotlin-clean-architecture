@@ -1,13 +1,8 @@
 package id.refactory.myapplication.infrastructures.di.modules
 
-import dagger.Module
-import dagger.Provides
 import id.refactory.data.persistences.mappers.UserDataMapper
+import org.koin.dsl.module
 
-@Module
-class MapperModule {
-    @Provides
-    fun provideUserDataMapper(): UserDataMapper {
-        return UserDataMapper()
-    }
+val mapperModule = module {
+    factory { UserDataMapper() }
 }
