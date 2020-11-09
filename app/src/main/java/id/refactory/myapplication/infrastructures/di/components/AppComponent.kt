@@ -3,6 +3,7 @@ package id.refactory.myapplication.infrastructures.di.components
 import dagger.Component
 import id.refactory.myapplication.infrastructures.di.modules.*
 import id.refactory.myapplication.ui.presenters.MainPresenter
+import id.refactory.myapplication.ui.presenters.NewsPresenter
 import javax.inject.Singleton
 
 @Singleton
@@ -14,8 +15,11 @@ import javax.inject.Singleton
     RepositoryModule::class,
     UseCaseModule::class
 ])
+
 interface AppComponent {
+
     fun inject(mainPresenter: MainPresenter)
+    fun inject(newsPresenter: NewsPresenter)
 
     companion object {
         fun getComponent(): AppComponent {

@@ -1,5 +1,6 @@
 package id.refactory.myapplication.ui.activities
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -38,6 +39,9 @@ class MainActivity : AppCompatActivity(), MainView.View {
         adapter = UserListAdapter(this, users)
         rv_users.adapter = adapter
         presenter.onLoadUsers(mutableMapOf())
+        button?.setOnClickListener {
+            startActivity(Intent(this, NewsActivity::class.java))
+        }
     }
 
     override fun onError() {
