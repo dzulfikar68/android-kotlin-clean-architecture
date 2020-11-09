@@ -2,6 +2,7 @@ package id.refactory.myapplication.infrastructures.di.components
 
 import dagger.Component
 import id.refactory.myapplication.infrastructures.di.modules.*
+import id.refactory.myapplication.ui.presenters.AddPresenter
 import id.refactory.myapplication.ui.presenters.MainPresenter
 import id.refactory.myapplication.ui.presenters.NewsPresenter
 import javax.inject.Singleton
@@ -20,6 +21,7 @@ interface AppComponent {
 
     fun inject(mainPresenter: MainPresenter)
     fun inject(newsPresenter: NewsPresenter)
+    fun inject(addPresenter: AddPresenter)
 
     companion object {
         fun getComponent(): AppComponent {

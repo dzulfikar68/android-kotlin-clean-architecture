@@ -1,4 +1,4 @@
-package id.refactory.data.payload.api.user
+package id.refactory.data.payload.api.news
 
 data class NewsResponseData(
     val id: Long,

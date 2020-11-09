@@ -9,7 +9,10 @@ import javax.inject.Inject
 import javax.inject.Named
 
 class MainPresenter (var view: MainView.View?): MainView.Presenter {
-    @Inject @Named("APIGetUserUseCase") lateinit var getUsers: GetUsers
+
+    @Inject
+    @Named("APIGetUserUseCase")
+    lateinit var getUsers: GetUsers
 
     init {
         AppComponent.getComponent().inject(this)

@@ -1,6 +1,6 @@
 package id.refactory.data.persistences.mappers
 
-import id.refactory.data.payload.api.user.NewsResponseData
+import id.refactory.data.payload.api.news.NewsResponseData
 import id.refactory.domain.News
 
 class NewsDataMapper {
@@ -17,5 +17,14 @@ class NewsDataMapper {
             )
         }
         return response
+    }
+
+    fun convertNews(result: NewsResponseData?): News {
+        return News(
+            id = result?.id,
+            userId = result?.userId,
+            title = result?.title,
+            description = result?.body
+        )
     }
 }

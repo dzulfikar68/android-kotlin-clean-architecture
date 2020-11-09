@@ -1,4 +1,3 @@
 package id.refactory.usecases
 
-class GetItemNews {
-}
+class DeleteNews

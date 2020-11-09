@@ -6,6 +6,7 @@ import id.refactory.data.persistences.repositories.NewsRepository
 import id.refactory.data.persistences.repositories.UserRepository
 import id.refactory.usecases.GetNews
 import id.refactory.usecases.GetUsers
+import id.refactory.usecases.PostNews
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Named
@@ -19,6 +20,15 @@ class UseCaseModule {
         compositeDisposable: CompositeDisposable
     ): GetUsers {
         return GetUsers(userRepository, compositeDisposable, AndroidSchedulers.mainThread())
+    }
+
+    @Provides
+    @Named("APIPostNewsUseCase")
+    fun providePostNewsUseCase(
+        @Named("APINewsRepository") newsRepository: NewsRepository,
+        compositeDisposable: CompositeDisposable
+    ): PostNews {
+        return PostNews(newsRepository, compositeDisposable, AndroidSchedulers.mainThread())
     }
 
     @Provides
