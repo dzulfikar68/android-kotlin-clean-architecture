@@ -1,36 +1,38 @@
 package id.refactory.myapplication.ui.presenters
 
-import id.refactory.data.payload.api.news.NewsRequestData
 import id.refactory.domain.News
 import id.refactory.myapplication.infrastructures.di.components.AppComponent
-import id.refactory.myapplication.ui.views.AddView
-import id.refactory.usecases.PostNews
+import id.refactory.myapplication.ui.views.DeleteView
+import id.refactory.usecases.DeleteNews
 import io.reactivex.observers.DisposableObserver
 import javax.inject.Inject
 import javax.inject.Named
 
-class AddPresenter(var view: AddView.View?) : AddView.Presenter {
+@Deprecated("Not used")
+class DeletePresenter(
+    var view: DeleteView.View?
+) : DeleteView.Presenter {
     @Inject
-    @Named("APIPostNewsUseCase")
-    lateinit var postNews: PostNews
+    @Named("APIDeleteNewsUseCase")
+    lateinit var deleteNews: DeleteNews
 
     init {
         AppComponent.getComponent().inject(this)
     }
 
-    override fun onLoadSubmitNews(params: NewsRequestData) {
-        postNews.postNews(PostNewsObserver(), params)
+    override fun onLoadDeleteNews(path: Int) {
+        deleteNews.deleteNews(DeleteNewsObserver(), path)
     }
 
     override fun onDestroy() {
         view = null
-        postNews.dispose()
+        deleteNews.dispose()
     }
 
-    inner class PostNewsObserver : DisposableObserver<News>() {
+    inner class DeleteNewsObserver : DisposableObserver<News>() {
         override fun onComplete() {}
         override fun onNext(t: News) {
-            view?.onSuccessSubmitNews(t)
+            view?.onSuccessDeleteNews(t)
         }
 
         override fun onError(e: Throwable) {
@@ -38,5 +40,4 @@ class AddPresenter(var view: AddView.View?) : AddView.Presenter {
             view?.onError()
         }
     }
-
 }

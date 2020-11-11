@@ -1,14 +1,14 @@
 package id.refactory.myapplication.ui.views
 
-import id.refactory.data.payload.api.news.NewsRequestData
 import id.refactory.domain.News
 
-interface AddView {
+@Deprecated("Not used")
+interface DeleteView {
     interface View : BaseView<Presenter> {
-        fun onSuccessSubmitNews(news: News)
+        fun onSuccessDeleteNews(news: News)
     }
 
     interface Presenter : BasePresenter {
-        fun onLoadSubmitNews(params: NewsRequestData)
+        fun onLoadDeleteNews(path: Int)
     }
 }

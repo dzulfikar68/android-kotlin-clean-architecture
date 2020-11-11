@@ -31,8 +31,14 @@ class NewsActivity : AppCompatActivity(), NewsView.View {
     }
 
     override fun onPrepare() {
+        supportActionBar?.title = "List News"
         rv_news.layoutManager = LinearLayoutManager(this)
-        adapter = NewsListAdapter(this, news)
+        adapter = NewsListAdapter(this, news) {
+            startActivity(
+                Intent(this, ShowActivity::class.java)
+                    .putExtra("data", it.id)
+            )
+        }
         rv_news.adapter = adapter
         presenter.onLoadNews(mutableMapOf())
         btn_add?.setOnClickListener {

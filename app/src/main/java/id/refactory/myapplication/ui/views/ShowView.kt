@@ -1,14 +1,13 @@
 package id.refactory.myapplication.ui.views
 
-import id.refactory.data.payload.api.news.NewsRequestData
 import id.refactory.domain.News
 
-interface AddView {
+interface ShowView {
     interface View : BaseView<Presenter> {
-        fun onSuccessSubmitNews(news: News)
+        fun onSuccessShowNews(news: News)
     }
 
     interface Presenter : BasePresenter {
-        fun onLoadSubmitNews(params: NewsRequestData)
+        fun onLoadShowNews(path: Int)
     }
 }

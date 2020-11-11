@@ -14,29 +14,35 @@
             android:orientation="vertical">
 
         <TextView
+                android:id="@+id/titleTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:hint="ADD NEWS"
+                android:hint="title"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="16dp"
+                android:background="#3E414A" />
+
+        <TextView
+                android:id="@+id/descriptionTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:hint="description"
                 android:textSize="25sp" />
 
-        <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/titleEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="title" />
-
-        <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/descriptionEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="description" />
-
         <Button
-                android:id="@+id/submitButton"
+                android:id="@+id/editButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="submit" />
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:text="edit" />
 
     </LinearLayout>
 

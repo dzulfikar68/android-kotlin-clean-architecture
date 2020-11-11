@@ -1,36 +1,35 @@
 package id.refactory.myapplication.ui.presenters
 
-import id.refactory.data.payload.api.news.NewsRequestData
 import id.refactory.domain.News
 import id.refactory.myapplication.infrastructures.di.components.AppComponent
-import id.refactory.myapplication.ui.views.AddView
-import id.refactory.usecases.PostNews
+import id.refactory.myapplication.ui.views.ShowView
+import id.refactory.usecases.ShowNews
 import io.reactivex.observers.DisposableObserver
 import javax.inject.Inject
 import javax.inject.Named
 
-class AddPresenter(var view: AddView.View?) : AddView.Presenter {
+class ShowPresenter(var view: ShowView.View?) : ShowView.Presenter {
     @Inject
-    @Named("APIPostNewsUseCase")
-    lateinit var postNews: PostNews
+    @Named("APIShowNewsUseCase")
+    lateinit var showNews: ShowNews
 
     init {
         AppComponent.getComponent().inject(this)
     }
 
-    override fun onLoadSubmitNews(params: NewsRequestData) {
-        postNews.postNews(PostNewsObserver(), params)
+    override fun onLoadShowNews(path: Int) {
+        showNews.showNews(ShowNewsObserver(), path)
     }
 
     override fun onDestroy() {
         view = null
-        postNews.dispose()
+        showNews.dispose()
     }
 
-    inner class PostNewsObserver : DisposableObserver<News>() {
+    inner class ShowNewsObserver : DisposableObserver<News>() {
         override fun onComplete() {}
         override fun onNext(t: News) {
-            view?.onSuccessSubmitNews(t)
+            view?.onSuccessShowNews(t)
         }
 
         override fun onError(e: Throwable) {

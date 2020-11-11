@@ -2,7 +2,7 @@ package id.refactory.myapplication.ui.activities
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import id.refactory.data.payload.api.news.NewsRequesttData
+import id.refactory.data.payload.api.news.NewsRequestData
 import id.refactory.domain.News
 import id.refactory.myapplication.R
 import id.refactory.myapplication.ui.presenters.AddPresenter
@@ -21,15 +21,17 @@ class AddActivity : AppCompatActivity(), AddView.View {
     }
 
     override fun onSuccessSubmitNews(news: News) {
-        toast(news.title.toString())
+        toast("sukses add data : " + news.title)
+        finish()
     }
 
     override fun onPrepare() {
+        supportActionBar?.title = "Add News"
         submitButton?.setOnClickListener {
             presenter.onLoadSubmitNews(
-                NewsRequesttData(
-                    titleEditText.text.toString().trim(),
-                    descriptionEditText.text.toString().trim()
+                NewsRequestData(
+                    title = titleEditText.text.toString().trim(),
+                    body = descriptionEditText.text.toString().trim()
                 )
             )
         }
@@ -37,5 +39,10 @@ class AddActivity : AppCompatActivity(), AddView.View {
 
     override fun onError() {
         toast("Error happen")
+    }
+
+    override fun onDestroy() {
+        presenter.onDestroy()
+        super.onDestroy()
     }
 }

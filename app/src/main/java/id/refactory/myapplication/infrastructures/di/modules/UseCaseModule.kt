@@ -4,9 +4,7 @@ import dagger.Module
 import dagger.Provides
 import id.refactory.data.persistences.repositories.NewsRepository
 import id.refactory.data.persistences.repositories.UserRepository
-import id.refactory.usecases.GetNews
-import id.refactory.usecases.GetUsers
-import id.refactory.usecases.PostNews
+import id.refactory.usecases.*
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Named
@@ -38,5 +36,32 @@ class UseCaseModule {
         compositeDisposable: CompositeDisposable
     ): GetNews {
         return GetNews(newsRepository, compositeDisposable, AndroidSchedulers.mainThread())
+    }
+
+    @Provides
+    @Named("APIShowNewsUseCase")
+    fun provideShowNewsUseCase(
+        @Named("APINewsRepository") newsRepository: NewsRepository,
+        compositeDisposable: CompositeDisposable
+    ): ShowNews {
+        return ShowNews(newsRepository, compositeDisposable, AndroidSchedulers.mainThread())
+    }
+
+    @Provides
+    @Named("APIPutNewsUseCase")
+    fun providePutNewsUseCase(
+        @Named("APINewsRepository") newsRepository: NewsRepository,
+        compositeDisposable: CompositeDisposable
+    ): PutNews {
+        return PutNews(newsRepository, compositeDisposable, AndroidSchedulers.mainThread())
+    }
+
+    @Provides
+    @Named("APIDeleteNewsUseCase")
+    fun provideDeleteNewsUseCase(
+        @Named("APINewsRepository") newsRepository: NewsRepository,
+        compositeDisposable: CompositeDisposable
+    ): DeleteNews {
+        return DeleteNews(newsRepository, compositeDisposable, AndroidSchedulers.mainThread())
     }
 }

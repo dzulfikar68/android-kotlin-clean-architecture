@@ -11,7 +11,8 @@ import id.refactory.myapplication.R
 
 class NewsListAdapter(
     private val context: Context,
-    private val news: MutableList<News>
+    private val news: MutableList<News>,
+    private val event: (News) -> Unit
 ) : RecyclerView.Adapter<NewsListAdapter.ViewHolder>() {
 
     override fun getItemCount(): Int = news.size
@@ -25,6 +26,9 @@ class NewsListAdapter(
         val user = news[position]
         holder.tvNewsTitle?.text = user.title
         holder.tvNewsDescription?.text = user.description
+        holder.itemView.setOnClickListener {
+            event.invoke(news[position])
+        }
     }
 
     inner class ViewHolder(row: View) : RecyclerView.ViewHolder(row) {

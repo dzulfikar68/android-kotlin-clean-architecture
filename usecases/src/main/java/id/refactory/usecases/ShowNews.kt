@@ -12,8 +12,8 @@ class ShowNews(
     private var compositeDisposable: CompositeDisposable,
     private var observerScheduler: Scheduler
 ) {
-    fun showNews(observer: DisposableObserver<News>, params: Map<String, String>) {
-        val observable = repository.showNews(params)
+    fun showNews(observer: DisposableObserver<News>, path: Int) {
+        val observable = repository.showNews(path)
             .subscribeOn(Schedulers.newThread())
             .observeOn(observerScheduler)
 

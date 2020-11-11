@@ -1,6 +1,6 @@
 package id.refactory.usecases
 
-import id.refactory.data.payload.api.news.NewsRequesttData
+import id.refactory.data.payload.api.news.NewsRequestData
 import id.refactory.data.persistences.repositories.NewsRepository
 import id.refactory.domain.News
 import io.reactivex.Scheduler
@@ -13,7 +13,7 @@ class PostNews(
     private var compositeDisposable: CompositeDisposable,
     private var observerScheduler: Scheduler
 ) {
-    fun postNews(observer: DisposableObserver<News>, params: NewsRequesttData) {
+    fun postNews(observer: DisposableObserver<News>, params: NewsRequestData) {
         val observable = repository.postNews(params)
             .subscribeOn(Schedulers.newThread())
             .observeOn(observerScheduler)

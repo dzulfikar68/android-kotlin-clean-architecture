@@ -1,6 +1,6 @@
 package id.refactory.data.persistences.repositories
 
-import id.refactory.data.payload.api.news.NewsRequesttData
+import id.refactory.data.payload.api.news.NewsRequestData
 import id.refactory.data.payload.contracts.RepositoryInterface
 import id.refactory.data.persistences.contracts.NewsPersistenceInterface
 import id.refactory.data.persistences.mappers.NewsDataMapper
@@ -18,13 +18,25 @@ class NewsRepository(
         }
     }
 
-    fun showNews(params: Map<String, String>): Observable<News> {
-        return persistence.showNews(params).map {
+    fun showNews(path: Int): Observable<News> {
+        return persistence.showNews(path).map {
             mapper.convertNews(it)
         }
     }
 
-    fun postNews(params: NewsRequesttData): Observable<News> {
+    fun deleteNews(path: Int): Observable<News> {
+        return persistence.deleteNews(path).map {
+            mapper.convertNews(it)
+        }
+    }
+
+    fun putNews(path: Int, body: NewsRequestData): Observable<News> {
+        return persistence.putNews(path, body).map {
+            mapper.convertNews(it)
+        }
+    }
+
+    fun postNews(params: NewsRequestData): Observable<News> {
         return persistence.postNews(params).map {
             mapper.convertNews(it)
         }
