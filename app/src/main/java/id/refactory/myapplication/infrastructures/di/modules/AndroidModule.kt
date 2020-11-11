@@ -7,6 +7,7 @@ import java.util.concurrent.Executors
 import kotlin.coroutines.CoroutineContext
 
 val androidModule = module {
-    factory { MyApplication.getInstance().applicationContext }
+
+factory { MyApplication.getInstance().applicationContext }
     single<CoroutineContext> { Executors.newSingleThreadExecutor().asCoroutineDispatcher() }
 }

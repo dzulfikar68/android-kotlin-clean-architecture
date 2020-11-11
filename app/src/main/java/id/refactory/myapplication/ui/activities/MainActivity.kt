@@ -38,6 +38,9 @@ class MainActivity : AppCompatActivity(), MainView.View {
         rv_users.layoutManager = LinearLayoutManager(this)
         rv_users.adapter = adapter
         presenter.onLoadUsers(mutableMapOf())
+        startButton?.setOnClickListener {
+
+        }
     }
 
     override fun onError() {
