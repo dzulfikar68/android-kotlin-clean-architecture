@@ -1,0 +1,18 @@
+Index: .idea/compiler.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"CompilerConfiguration\">\n    <bytecodeTargetLevel target=\"1.7\">\n      <module name=\"data\" target=\"1.7\" />\n      <module name=\"domain\" target=\"1.7\" />\n      <module name=\"RefactoryAndroidTest.app\" target=\"1.8\" />\n      <module name=\"RefactoryAndroidTest.usecases\" target=\"1.8\" />\n      <module name=\"usecases\" target=\"1.7\" />\n    </bytecodeTargetLevel>\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/compiler.xml	(revision 137c5056611374a5572c9362e9096027ad526a32)
++++ .idea/compiler.xml	(date 1604904728000)
+@@ -2,6 +2,8 @@
+ <project version="4">
+   <component name="CompilerConfiguration">
+     <bytecodeTargetLevel target="1.7">
++      <module name="android-kotlin-clean-architecture.app" target="1.8" />
++      <module name="android-kotlin-clean-architecture.usecases" target="1.8" />
+       <module name="data" target="1.7" />
+       <module name="domain" target="1.7" />
+       <module name="RefactoryAndroidTest.app" target="1.8" />
