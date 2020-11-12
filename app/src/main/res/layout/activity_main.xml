@@ -15,11 +15,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-        <Button
-                android:id="@+id/startButton"
+        <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="NEWS LIST" />
+                android:layout_above="@id/startButton"
+                android:layout_marginBottom="10dp"
+                android:gravity="center"
+                android:text="klik tombol dibawah ini:" />
+
+        <Button
+                android:layout_width="wrap_content"
+                android:id="@+id/startButton"
+                android:layout_centerInParent="true"
+                android:layout_height="wrap_content"
+                android:text="NEWS LIST USER REFACTORY.ID" />
 
     </RelativeLayout>
 

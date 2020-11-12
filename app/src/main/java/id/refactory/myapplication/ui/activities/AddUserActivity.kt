@@ -16,6 +16,10 @@ class AddUserActivity : AppCompatActivity(), AddUserView.View {
         TODO("Not yet implemented")
     }
 
+    override fun onLoad(load: Boolean) {
+        TODO("Not yet implemented")
+    }
+
     override fun onPrepare() {
         TODO("Not yet implemented")
     }

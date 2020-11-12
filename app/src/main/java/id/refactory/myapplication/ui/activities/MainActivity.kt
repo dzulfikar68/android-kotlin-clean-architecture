@@ -1,5 +1,6 @@
 package id.refactory.myapplication.ui.activities
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -39,7 +40,9 @@ class MainActivity : AppCompatActivity(), MainView.View {
         rv_users.adapter = adapter
         presenter.onLoadUsers(mutableMapOf())
         startButton?.setOnClickListener {
-
+            startActivity(
+                Intent(this, ListUserActivity::class.java)
+            )
         }
     }
 

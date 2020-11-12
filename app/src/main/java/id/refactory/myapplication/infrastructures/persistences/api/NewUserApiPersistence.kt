@@ -8,21 +8,25 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
 class NewUserApiPersistence(private var newUserApi: NewUserApi) : NewUserPersistenceInterface {
+    companion object {
+        const val TOKEN = "565d3c21a7ab169e5324608204651a0f3795e6747c809f9b3b800e4ddf1b2c2b"
+    }
+
     override suspend fun getNewUsers(params: Map<String, String>): Flow<GetNewUserResponseInterface> {
         return flow {
-            emit(newUserApi.getNewUser(params))
+            emit(newUserApi.getNewUser(params, TOKEN))
         }
     }
 
     override suspend fun showNewUsers(path: Int): Flow<GetNewUserResponseInterface> {
         return flow {
-            emit(newUserApi.showNewUser(path))
+            emit(newUserApi.showNewUser(path, TOKEN))
         }
     }
 
     override suspend fun addNewUsers(param: NewUserApiRequest): Flow<GetNewUserResponseInterface> {
         return flow {
-            emit(newUserApi.addNewUser(param))
+            emit(newUserApi.addNewUser(param, TOKEN))
         }
     }
 
@@ -31,13 +35,13 @@ class NewUserApiPersistence(private var newUserApi: NewUserApi) : NewUserPersist
         param: NewUserApiRequest
     ): Flow<GetNewUserResponseInterface> {
         return flow {
-            emit(newUserApi.editNewUser(path, param))
+            emit(newUserApi.editNewUser(path, param, TOKEN))
         }
     }
 
     override suspend fun deleteNewUsers(path: Int): Flow<GetNewUserResponseInterface> {
         return flow {
-            emit(newUserApi.deleteNewUser(path))
+            emit(newUserApi.deleteNewUser(path, TOKEN))
         }
     }
 

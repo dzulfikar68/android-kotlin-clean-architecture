@@ -6,6 +6,7 @@ import id.refactory.domain.NewUser
 interface AddUserView {
     interface View : BaseView<Presenter> {
         fun onSuccessSubmitUser(users: NewUser)
+        fun onLoad(load: Boolean)
     }
 
     interface Presenter : BasePresenter {

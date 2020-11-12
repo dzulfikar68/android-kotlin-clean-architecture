@@ -11,26 +11,33 @@ import id.refactory.myapplication.R
 
 class NewUserListAdapter(
     private val context: Context,
-    private val users: MutableList<NewUser>
+    private val users: MutableList<NewUser>,
+    private val event: (NewUser) -> Unit
 ) : RecyclerView.Adapter<NewUserListAdapter.ViewHolder>() {
 
     override fun getItemCount(): Int = users.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.users_list_item, parent, false)
+        val view = LayoutInflater.from(context).inflate(R.layout.new_users_list_item, parent, false)
         return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val user = users[position]
-        holder.tvUserName?.text = user.name
+        holder.tvNewUserName?.text = user.name
+        holder.tvNewUserEmail?.text = user.email
+        holder.itemView.setOnClickListener {
+            event.invoke(user)
+        }
     }
 
     inner class ViewHolder(row: View) : RecyclerView.ViewHolder(row) {
-        var tvUserName: TextView? = null
+        var tvNewUserName: TextView? = null
+        var tvNewUserEmail: TextView? = null
 
         init {
-            tvUserName = row.findViewById(R.id.tv_user_name) as TextView
+            tvNewUserName = row.findViewById(R.id.tv_new_user_name) as TextView
+            tvNewUserEmail = row.findViewById(R.id.tv_new_user_email) as TextView
         }
     }
 }

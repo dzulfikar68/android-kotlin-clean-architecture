@@ -2,6 +2,7 @@ package id.refactory.myapplication.infrastructures.di.modules
 
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.GsonBuilder
+import id.refactory.myapplication.infrastructures.api.NewUserApi
 import id.refactory.myapplication.infrastructures.api.UserApi
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -25,11 +26,13 @@ val apiModule = module {
             .build()
 
         Retrofit.Builder()
-            .baseUrl("https://my-json-server.typicode.com/glendmaatita/userjsondemo/")
+//        https://my-json-server.typicode.com/glendmaatita/userjsondemo
+            .baseUrl("https://gorest.co.in/")
             .addConverterFactory(GsonConverterFactory.create(get()))
             .client(client)
             .build()
     }
 
     factory<UserApi> { get<Retrofit>().create(UserApi::class.java) }
+    factory<NewUserApi> { get<Retrofit>().create(NewUserApi::class.java) }
 }
