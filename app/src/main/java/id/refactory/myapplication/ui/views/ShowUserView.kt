@@ -4,7 +4,8 @@ import id.refactory.domain.NewUser
 
 interface ShowUserView {
     interface View : BaseView<Presenter> {
-        fun onSuccessLoadUser(users: NewUser)
+        fun onSuccessLoadUser(user: NewUser)
+        fun onLoading(bool: Boolean)
     }
 
     interface Presenter : BasePresenter {

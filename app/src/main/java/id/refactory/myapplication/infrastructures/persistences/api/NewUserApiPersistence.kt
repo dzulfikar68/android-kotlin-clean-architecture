@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.flow
 
 class NewUserApiPersistence(private var newUserApi: NewUserApi) : NewUserPersistenceInterface {
     companion object {
-        const val TOKEN = "565d3c21a7ab169e5324608204651a0f3795e6747c809f9b3b800e4ddf1b2c2b"
+        const val TOKEN = "Bearer 565d3c21a7ab169e5324608204651a0f3795e6747c809f9b3b800e4ddf1b2c2b"
     }
 
     override suspend fun getNewUsers(params: Map<String, String>): Flow<GetNewUserResponseInterface> {

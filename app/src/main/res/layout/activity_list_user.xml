@@ -9,7 +9,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+        <Button
+                android:id="@+id/addButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="add user" />
+
         <androidx.recyclerview.widget.RecyclerView
+                android:layout_below="@id/addButton"
                 android:id="@+id/rv_new_users"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />

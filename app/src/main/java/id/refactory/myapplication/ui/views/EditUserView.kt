@@ -5,9 +5,9 @@ import id.refactory.domain.NewUser
 
 interface EditUserView {
     interface View : BaseView<Presenter> {
-        fun onSuccessSubmitUser(users: NewUser)
-        fun onSuccessShowUser(users: NewUser)
-        fun onSuccessDeleteUser(users: NewUser)
+        fun onSuccessSubmitUser(user: NewUser)
+        fun onSuccessShowUser(user: NewUser)
+        fun onSuccessDeleteUser(user: NewUser)
     }
 
     interface Presenter : BasePresenter {

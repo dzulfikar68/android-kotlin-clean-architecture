@@ -17,7 +17,7 @@ class ListUserActivity : AppCompatActivity(), ListUserView.View {
     private val presenter = ListUserPresenter(this)
     private var users = mutableListOf<NewUser>()
     private var adapter: NewUserListAdapter? = null
-    private var progressDialog: ProgressDialog? = ProgressDialog(this)
+    private var progressDialog: ProgressDialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,19 +27,13 @@ class ListUserActivity : AppCompatActivity(), ListUserView.View {
     }
 
     override fun onSuccessLoadUsers(users: List<NewUser>) {
+        endLoading()
         this.users.clear()
         this.users.addAll(users)
         adapter?.notifyDataSetChanged()
     }
 
     override fun onLoad(load: Boolean) {
-        if (load) {
-            progressDialog?.setTitle("Refactory.id")
-            progressDialog?.setMessage("Application is loading, please wait")
-            progressDialog?.show()
-        } else {
-            progressDialog?.dismiss()
-        }
     }
 
     private val onClickItem: (NewUser) -> Unit = {
@@ -49,10 +43,31 @@ class ListUserActivity : AppCompatActivity(), ListUserView.View {
         )
     }
 
+    private fun startLoading() {
+        progressDialog = ProgressDialog(this)
+        progressDialog?.setTitle("Refactory.id")
+        progressDialog?.setMessage("Application is loading, please wait")
+        progressDialog?.show()
+    }
+
+    private fun endLoading() {
+        progressDialog?.dismiss()
+    }
+
     override fun onPrepare() {
         adapter = NewUserListAdapter(this, users, onClickItem)
         rv_new_users.layoutManager = LinearLayoutManager(this)
         rv_new_users.adapter = adapter
+        addButton?.setOnClickListener {
+            startActivity(
+                Intent(this, AddUserActivity::class.java)
+            )
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        startLoading()
         presenter.onLoadUsers(
             mutableMapOf(
                 "email" to "refactory.id"
@@ -61,6 +76,7 @@ class ListUserActivity : AppCompatActivity(), ListUserView.View {
     }
 
     override fun onError() {
+        endLoading()
         toast("Error happen")
     }
 }

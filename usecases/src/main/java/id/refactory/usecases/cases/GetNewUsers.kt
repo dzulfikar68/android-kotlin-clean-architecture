@@ -7,7 +7,6 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.flow.onStart
 import kotlin.coroutines.CoroutineContext
 
 class GetNewUsers(
@@ -20,16 +19,16 @@ class GetNewUsers(
         job = GlobalScope.launch(context) {
             repository.getNewUsers(params)
                 .flowOn(Dispatchers.IO)
-                .onStart { listener.onLoad(true) }
+//                .onStart { listener.onLoad(true) }
                 .catch {
                     withContext(Dispatchers.Main) {
-                        listener.onLoad(false)
+//                        listener.onLoad(false)
                         listener.onError(it)
                     }
                 }
                 .collect {
                     withContext(Dispatchers.Main) {
-                        listener.onLoad(false)
+//                        listener.onLoad(false)
                         listener.onComplete(it)
                     }
                 }
