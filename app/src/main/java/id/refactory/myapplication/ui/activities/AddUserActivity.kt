@@ -2,6 +2,7 @@ package id.refactory.myapplication.ui.activities
 
 import android.app.ProgressDialog
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import id.refactory.data.payload.api.user.NewUserApiRequest
 import id.refactory.domain.NewUser
@@ -21,7 +22,15 @@ class AddUserActivity : AppCompatActivity(), AddUserView.View {
         onPrepare()
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) {
+            finish()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
     override fun onSuccessSubmitUser(users: NewUser) {
+        endLoading()
         toast("Akun ${users.email} berhasil ditambahkan")
         finish()
     }
@@ -31,7 +40,15 @@ class AddUserActivity : AppCompatActivity(), AddUserView.View {
 
     override fun onPrepare() {
         supportActionBar?.title = "Add New User"
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         submitButton?.setOnClickListener {
+            val email = emailEditText?.text.toString().trim()
+            if (!email.contains("@refactory.id")) {
+                toast("email harus menggunakan domain: refactory.id")
+                return@setOnClickListener
+            }
+            startLoading()
             val request = NewUserApiRequest(
                 name = nameEditText?.text.toString().trim(),
                 email = emailEditText?.text.toString().trim(),
@@ -51,6 +68,18 @@ class AddUserActivity : AppCompatActivity(), AddUserView.View {
     }
 
     override fun onError() {
+        endLoading()
         toast("Error happen")
+    }
+
+    private fun startLoading() {
+        progressDialog = ProgressDialog(this)
+        progressDialog?.setTitle("Refactory.id")
+        progressDialog?.setMessage("Application is loading, please wait")
+        progressDialog?.show()
+    }
+
+    private fun endLoading() {
+        progressDialog?.dismiss()
     }
 }

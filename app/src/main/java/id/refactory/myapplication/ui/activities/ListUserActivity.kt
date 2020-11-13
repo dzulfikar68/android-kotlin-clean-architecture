@@ -3,6 +3,7 @@ package id.refactory.myapplication.ui.activities
 import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import id.refactory.domain.NewUser
@@ -22,8 +23,18 @@ class ListUserActivity : AppCompatActivity(), ListUserView.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list_user)
+
         supportActionBar?.title = "CRUD email khusus @refactory.id"
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         onPrepare()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) {
+            finish()
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onSuccessLoadUsers(users: List<NewUser>) {
